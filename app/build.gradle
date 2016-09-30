@@ -2,6 +2,7 @@ apply plugin: 'com.android.application'
 apply plugin: 'kotlin-android'
 apply plugin: 'realm-android'
 apply plugin: 'kotlin-android-extensions'
+apply plugin: 'com.getkeepsafe.dexcount'
 
 android {
     compileSdkVersion 24
@@ -17,9 +18,22 @@ android {
     dataBinding {
         enabled = true
     }
+    signingConfigs {
+        release {
+            Properties properties = new Properties()
+            properties.load(project.rootProject.file('local.properties').newDataInputStream())
+
+            storeFile file(properties.getProperty('storeFile'))
+            keyAlias properties.getProperty('keyAlias')
+            keyPassword properties.getProperty('keyPassword')
+            storePassword properties.getProperty('storePassword')
+        }
+    }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            shrinkResources true
+            signingConfig signingConfigs.release
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -67,4 +81,13 @@ dependencies {
     kapt 'com.github.AleksanderMielczarek.RealmRepository:realmrepository-processor:0.2.0'
     compile 'com.github.AleksanderMielczarek:Napkin:0.2.1'
     compile 'com.github.AleksanderMielczarek:HamburgerArrowNavigation:0.1.1'
+}
+
+dexcount {
+    format = "list"
+    includeClasses = false
+    includeFieldCount = true
+    includeTotalMethodCount = false
+    orderByMethodCount = false
+    verbose = false
 }
