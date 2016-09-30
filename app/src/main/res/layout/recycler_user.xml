@@ -1,20 +1,21 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <data>
 
         <variable
             name="viewModel"
-            type="com.github.aleksandermielczarek.kotlinexample.User"/>
+            type="com.github.aleksandermielczarek.kotlinexample.User" />
 
-        <import type="com.github.aleksandermielczarek.kotlinexample.UsersViewModelKt"/>
+        <import type="com.github.aleksandermielczarek.kotlinexample.UsersViewModelKt" />
 
     </data>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="?attr/selectableItemBackground"
         android:onClickListener="@{view -> UsersViewModelKt.openDetails(viewModel, view)}"
         android:orientation="horizontal"
         android:paddingBottom="8dp"
@@ -25,17 +26,19 @@
         android:paddingTop="8dp">
 
         <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/avatar"
+            android:transitionName="avatar"
             android:layout_width="40dp"
             android:layout_height="40dp"
             android:layout_marginEnd="16dp"
             android:layout_marginRight="16dp"
-            app:imageUrl="@{viewModel.avatarUrl}"/>
+            app:imageUrl="@{viewModel.avatarUrl}" />
 
         <TextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="center_vertical"
-            android:text="@{viewModel.name}"/>
+            android:text="@{viewModel.name}" />
 
     </LinearLayout>
 

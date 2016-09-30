@@ -8,8 +8,10 @@ import com.squareup.picasso.Picasso
  * Created by Aleksander Mielczarek on 30.09.2016.
  */
 @BindingAdapter("imageUrl")
-fun ImageView.setImageUrl(imageUrl: String) {
-    Picasso.with(context)
-            .load(imageUrl)
-            .into(this)
+fun ImageView.setImageUrl(imageUrl: String?) {
+    imageUrl?.let {
+        Picasso.with(context)
+                .load(imageUrl)
+                .into(this)
+    }
 }

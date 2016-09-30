@@ -32,4 +32,5 @@ class AppModule(val context: Context) {
     fun provideUserRepository(repositoryConfiguration: RealmRepositoryConfiguration): UserRepository {
         return UserRepositoryImpl(repositoryConfiguration)
     }
+
 }
